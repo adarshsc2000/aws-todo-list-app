@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useAuth } from "react-oidc-context";
+import TodoList from './components/TodoList';
+import { COGNITO_DOMAIN, COGNITO_CLIENT_ID, COGNITO_REDIRECT_URI } from './constants/constants.ts';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const auth = useAuth();
 
+  const signOutRedirect = () => {
+    const clientId = COGNITO_CLIENT_ID;
+    const logoutUri = COGNITO_REDIRECT_URI;
+    const cognitoDomain = COGNITO_DOMAIN;
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    auth.removeUser();
+  };
+
+  if (auth.isLoading) return <div>Loading...</div>; 
+
+  if (auth.error) return <div>Encountering error... {auth.error.message} </div>; 
+
+  if (!auth.isAuthenticated) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <button onClick={() => auth.signinRedirect()}>Sign in</button>
+      </div>
+    );
+  }
+  
+  const rawUsername = auth.user?.profile['cognito:username'];
+  const username = (typeof rawUsername === 'string') ? rawUsername : '';
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <Toaster position='top-center' />
+      <header className="text-center my-4">
+        <p>Hello {username}</p>
+        <button onClick={signOutRedirect} className="text-red-500 mt-2">Sign out</button>
+      </header>
+      <main className="flex justify-center items-center">
+        <TodoList />
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
