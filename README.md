@@ -1,6 +1,6 @@
 # ✅ Serverless Todo App
 
-A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, **AWS Lambda**, **DynamoDB**, and **Amazon Cognito**. This application supports creating, editing, and deleting tasks with smooth UX and secure authentication — fully deployed on AWS using **S3**, **CloudFront**, and **CDK/Terraform** for infrastructure automation.
+A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, **AWS Lambda**, **DynamoDB**, and **Amazon Cognito**. This application supports creating, editing, and deleting tasks with smooth UX and secure authentication — fully deployed on AWS using **S3**, **CloudFront**, and **CDK** for infrastructure automation.
 
 ---
 
@@ -8,10 +8,10 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
 
 - ✨ **Clean UI** built with React + Tailwind CSS
 - 🔐 **Secure Authentication** via Amazon Cognito (OIDC)
-- ⚙️ **RESTful API** with AWS Lambda (Node.js or Python backend)
+- ⚙️ **RESTful API** with AWS Lambda (Node.js)
 - 💾 **Data Persistence** via Amazon DynamoDB
 - ⚡ **Responsive** and mobile-friendly
-- ☁️ **Serverless Deployment** using S3 + CloudFront + AWS CDK or Terraform
+- ☁️ **Serverless Deployment** using S3 + CloudFront + AWS CDK for Automation
 - 📦 **Token-based Authentication** handled on the frontend with `react-oidc-context`
 - 🧠 **Optimized UX**: inline editing, toast notifications, and loading spinners
 
@@ -19,9 +19,9 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
 
 ## 🖥️ Screenshots
 
-| Login                        | Todo List                        | Editing Mode                      |
+| Todo List                   | Sign In                          | Editing Mode                      |
 |-----------------------------|----------------------------------|-----------------------------------|
-| ![](./screenshots/login.png) | ![](./screenshots/todolist.png) | ![](./screenshots/edit-todo.png) |
+| ![Todo List](./public/screenshots/todo-list.png) | ![Todo List](./public/screenshots/sign-in.png) | ![Edit Todos](./screenshots/edit-todo.png) |
 
 ---
 
@@ -30,17 +30,17 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
 ### Frontend
 - [React](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [react-hot-toast](https://react-hot-toast.com/)
 - [react-oidc-context](https://github.com/authts/react-oidc-context)
+- [react-hot-toast](https://react-hot-toast.com/)
 
-### Backend (Serverless)
+### AWS Backend (Serverless)
 - [AWS Lambda](https://aws.amazon.com/lambda/)
 - [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
 - [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
 - [Amazon Cognito](https://aws.amazon.com/cognito/)
 
 ### Infrastructure
-- [AWS CDK](https://docs.aws.amazon.com/cdk/) *(or Terraform optionally)*
+- [AWS CDK](https://docs.aws.amazon.com/cdk/)
 - [S3 + CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/)
 
 ---
@@ -56,7 +56,6 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
   │   ├── hooks/
   │   ├── types/
   │   └── App.tsx
-  ├── tailwind.config.js
   └── vite.config.ts
 ```
 
@@ -76,18 +75,11 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
 
 ### 🔑 Environment Variables
 
-Frontend (`.env`)
 ```env
 VITE_COGNITO_CLIENT_ID=your_client_id
 VITE_COGNITO_REDIRECT_URI=http://localhost:5173
 VITE_COGNITO_AUTHORITY=https://your-cognito-domain.auth.region.amazoncognito.com
 VITE_API_BASE_URL=https://your-api-gateway-url
-```
-
-Backend (`functions/env.js` or `.env`)
-```env
-DYNAMODB_TABLE=TodoTable
-REGION=us-east-1
 ```
 
 ---
@@ -108,6 +100,7 @@ npm run dev
 ```bash
 # CDK bootstrap and deploy
 cd aws/cdk
+cdk configure # to connect and configure your aws account
 cdk bootstrap
 cdk deploy
 ```
@@ -116,7 +109,7 @@ cdk deploy
 
 ## 💡 Notes
 
-- Authentication is handled on the frontend using `react-oidc-context`, with centralized token guards.
+- Authentication is handled on the frontend using `Amazon Cognito`, with centralized token guards.
 - Error messages are surfaced via toast notifications.
 - Smooth animations and visual feedback are added using Tailwind transitions and spinners.
 - No unused files or dead components — structure is clean and modular.
