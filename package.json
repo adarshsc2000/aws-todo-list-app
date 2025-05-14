@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build --outDir src/aws/site-contents",
+    "build": "tsc -b && vite build --outDir aws/cdk/site-contents",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "react-oidc-context";
 import { createTodo, getTodos, updateTodo, deleteTodo } from '../services/todoServices';
 import type { Todo } from "../types/todo";
 import toast from "react-hot-toast";
