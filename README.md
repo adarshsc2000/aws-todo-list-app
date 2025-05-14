@@ -21,7 +21,7 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
 
 | Todo List                   | Sign In                          | Editing Mode                      |
 |-----------------------------|----------------------------------|-----------------------------------|
-| ![Todo List](./public/screenshots/todo-list.png) | ![Todo List](./public/screenshots/sign-in.png) | ![Edit Todos](./screenshots/edit-todo.png) |
+| ![Todo List](./public/screenshots/todo-list.png) | ![Todo List](./public/screenshots/sign-in.png) | ![Edit Todos](./public/screenshots/edit-todo.png) |
 
 ---
 
