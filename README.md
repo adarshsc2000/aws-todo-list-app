@@ -25,38 +25,34 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
 
 ---
 
-## 🧱 Tech Stack
+## 🧱 Built With
 
-### Frontend
 - [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [react-oidc-context](https://github.com/authts/react-oidc-context)
-- [react-hot-toast](https://react-hot-toast.com/)
-
-### AWS Backend (Serverless)
+- [AWS Cognito](https://aws.amazon.com/cognito/)
 - [AWS Lambda](https://aws.amazon.com/lambda/)
-- [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
-- [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
-- [Amazon Cognito](https://aws.amazon.com/cognito/)
-
-### Infrastructure
-- [AWS CDK](https://docs.aws.amazon.com/cdk/)
-- [S3 + CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/)
+- [AWS API Gateway](https://aws.amazon.com/api-gateway/)
+- [AWS DynamoDB](https://aws.amazon.com/dynamodb/)
+- [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)
+- [AWS CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/)
+- [AWS S3](https://aws.amazon.com/s3/)
 
 ---
 
 ## 📂 Project Structure
 
 ```
-/frontend
-  ├── public/
-  ├── src/
-  │   ├── components/
-  │   ├── services/
-  │   ├── hooks/
-  │   ├── types/
-  │   └── App.tsx
-  └── vite.config.ts
+aws-todo-list-app/
+├── aws/
+│   ├── cdk/              # CDK infrastructure code (S3 + CloudFront only)
+│   └── lambda/           # Standalone Lambda functions (manually uploaded)
+├── public/               # Public assets
+├── src/                  # Frontend source code (React + Tailwind CSS)
+├── .env.example          # Sample environment file
+├── index.html            # HTML template
+├── vite.config.ts        # Vite configuration
+└── README.md             # Project documentation
 ```
 
 ---
@@ -65,11 +61,86 @@ A full-stack **To-do List Application** built with **React**, **Tailwind CSS**, 
 
 ### 🔧 Prerequisites
 
-- AWS CLI configured
-- Node.js ≥ 18
-- AWS CDK or Terraform installed
-- Cognito User Pool & App Client set up
-- DynamoDB table created
+- Node.js >= 18
+- AWS CLI configured with IAM permissions
+- AWS CDK (v2) installed globally
+- An AWS account with permission to use Cognito, Lambda, DynamoDB, S3, CloudFront, API Gateway
+- Configuring Cognito, DynamoDB, API Gateway and Lambda functions in AWS Console
+
+---
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/adarshsc2000/aws-todo-list-app.git
+cd aws-todo-list-app
+```
+
+### 2. Install frontend dependencies
+
+```bash
+npm install
+```
+
+### 3. Create environment variables
+
+Create a `.env` file from `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Then update the values with your Cognito configuration and API endpoint.
+
+### 4. Build the frontend
+
+```bash
+npm run build
+```
+
+### 5. Run locally (optional dev)
+
+```bash
+npm run dev
+```
+
+---
+
+## 🏗️ Deploying Frontend Infrastructure (CDK)
+
+### 1. Navigate to the CDK folder
+
+```bash
+cd aws/cdk
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Bootstrap CDK (only once)
+
+```bash
+cdk bootstrap
+```
+
+### 4. Deploy the stack
+
+```bash
+cdk deploy
+```
+
+This will provision:
+
+- S3 bucket for frontend hosting
+- CloudFront distribution for CDN delivery
+
+> ⚠️ Note:
+>
+> - Lambda functions, API Gateway setup, DynamoDB, and Cognito are configured manually in the code and AWS Console — not provisioned via CDK.
+> - Lambda functions located in `aws/lambda/` are manually uploaded and connected to API Gateway endpoints. You may optionally migrate these into the CDK stack for full infrastructure-as-code support.
 
 ---
 
@@ -84,55 +155,12 @@ VITE_API_BASE_URL=https://your-api-gateway-url
 
 ---
 
-### 🧪 Local Development
+## 🧑‍💻 Author
 
-**Frontend**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
----
-
-### 🚀 Deployment
-
-```bash
-# CDK bootstrap and deploy
-cd aws/cdk
-cdk configure # to connect and configure your aws account
-cdk bootstrap
-cdk deploy
-```
-
----
-
-## 💡 Notes
-
-- Authentication is handled on the frontend using `Amazon Cognito`, with centralized token guards.
-- Error messages are surfaced via toast notifications.
-- Smooth animations and visual feedback are added using Tailwind transitions and spinners.
-- No unused files or dead components — structure is clean and modular.
-
----
-
-## 🏆 Grading Rubric Checklist
-
-| Criteria             | Implementation Status |
-|----------------------|------------------------|
-| ✅ Attention to Detail | No unused buttons, clean folders, robust error handling |
-| ✅ User Experience     | Smooth transitions, responsive UI, toast notifications |
-| ✅ Code Clarity        | Modular components, descriptive names, no redundancies |
-| ✅ Design & Creativity | Styled with Tailwind, edit-in-place, spinner UX |
+Developed by [Adarsh Shinju Chandran](https://github.com/adarshsc2000). Contributions and suggestions are welcome!
 
 ---
 
 ## 📜 License
 
-MIT License © 2025 [Adarsh Shinju Chandran]
-
----
-
-## 📬 Contact
-
-Have questions or feedback? Reach out at [adarshsc2000@gmail.com].
+This project is licensed under the MIT License.
