@@ -1,4 +1,5 @@
 import { API_INVOKE_URL } from "../constants/constants";
+import type { Todo } from "../types/todo";
 
 export const createTodo = async (title: string, token: string) => {
   const response = await fetch(API_INVOKE_URL+"/todos", {
@@ -27,7 +28,7 @@ export const getTodos = async (token: string) => {
 
   const data = await response.json();
     
-  return data.map((todo: any) => ({
+  return data.map((todo: Todo) => ({
     todoId: todo.todoId,
     title: todo.title,
     completed: todo.completed,

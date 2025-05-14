@@ -144,7 +144,7 @@ export default function TodoList() {
       </div>
 
       {loading ? (
-        <div className="text-center text-gray-500 py-6">Loading todos...</div>
+        <div className="text-center text-gray-500 py-6">Loading...</div>
       ) : error ? (
         <div className="text-center text-red-500 py-6">{error}</div>
       ) : todos.length === 0 ? (
