@@ -164,3 +164,9 @@ Developed by [Adarsh Shinju Chandran](https://github.com/adarshsc2000). Contribu
 ## 📜 License
 
 This project is licensed under the MIT License.
+
+---
+
+## 🤖 Use of AI Assistance
+
+While working on this project, I explored using AI tools to accelerate development. However, I couldn't fully rely on them due to outdated code suggestions or approaches that were inconsistent with current official documentation for the latest versions. That said, AI was still helpful in fixing bugs, generating content like this README and the favicon for example, and assisting with minor development tasks. I also made a conscious effort to follow good development practices, prioritize security, and streamline parts of the build process where possible using these LLMs.
