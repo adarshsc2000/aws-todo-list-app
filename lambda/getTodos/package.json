@@ -1,0 +1,16 @@
+{
+  "name": "get-todos",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to get Todos of the logged in user.",
+  "license": "ISC",
+  "author": "Adarsh",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.808.0",
+    "@aws-sdk/lib-dynamodb": "^3.808.0"
+  }
+}
